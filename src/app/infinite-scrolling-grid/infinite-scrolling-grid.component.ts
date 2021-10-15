@@ -2,8 +2,19 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-infinite-scrolling-grid',
-  templateUrl: './infinite-scrolling-grid.component.html',
-  styleUrls: ['./infinite-scrolling-grid.component.css']
+  template: `
+    <section
+      class="grid"
+      infiniteScroll
+      [scrollWindow]="false"
+      (scrolled)="onScroll()"
+    >
+      <span class="hint">Total count: {{ items.length }} </span>
+
+      <div class="card" *ngFor="let item of items">{{ item }}</div>
+    </section>
+  `,
+  styleUrls: ['./infinite-scrolling-grid.component.css'],
 })
 export class InfiniteScrollingGridComponent implements OnInit {
   items = Array.from({ length: 20 }).map((_, i) => `Item #${i}`);
